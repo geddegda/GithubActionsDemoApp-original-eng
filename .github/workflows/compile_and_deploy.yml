@@ -12,6 +12,7 @@ on:
 
 env:
   DOTNET_VERSION: 8.0.x
+  PROJECT: GithubActionsDemoApp/GithubActionsDemoApp.csproj
 
 jobs:
   build:
@@ -40,3 +41,14 @@ jobs:
 
     - name: Run tsts
       run: dotnet test --no-build
+
+    - name: Publish
+      run: dotnet publish $${{env.PROJECT}} -c Release -o myappgda --runtime win-x86
+
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v4.6.2
+      with:
+        path: ./myappgda
+        name: myappgda_result_from_CI
+
+      
