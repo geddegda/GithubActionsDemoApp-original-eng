@@ -9,6 +9,8 @@ on:
     - ".github/workflows/compile_and_deploy.yml"
     - "GithubActionsDemoApp/**"
     - "Tests/**"
+    tags:
+    - '*'
 
 env:
   DOTNET_VERSION: 8.0.x
@@ -54,10 +56,12 @@ jobs:
         name: myappgda_result_from_CI
 
     - name: Zip
+      if: startsWith(github.ref, 'ref/tags/')
       run: zip -r myappgda.zip ./myappgda
 
     - name: GH Release
       uses: softprops/action-gh-release@v2.3.2
+      if: startsWith(github.ref, 'ref/tags/')
       with:
         files: ./myappgda.zip
         body: "Our Application"
