@@ -16,6 +16,8 @@ env:
 
 jobs:
   build:
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     
     steps:
@@ -51,4 +53,13 @@ jobs:
         path: ./myappgda
         name: myappgda_result_from_CI
 
+    - name: Zip
+      run: zip -r myappgda.zip ./myappgda
+
+    - name: GH Release
+      uses: softprops/action-gh-release@v2.3.2
+      with:
+        files: ./myappgda.zip
+        body: "Our Application"
+        #tag_name: ${{github.ref_name}}
       
