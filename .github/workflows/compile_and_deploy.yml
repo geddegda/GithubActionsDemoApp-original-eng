@@ -61,5 +61,5 @@ jobs:
       with:
         files: ./myappgda.zip
         body: "Our Application"
-        #tag_name: ${{github.ref_name}}
+        tag_name: ${{github.ref_name}}
       
