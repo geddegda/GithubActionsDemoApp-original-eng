@@ -5,6 +5,10 @@ on:
   push:
     branches:
     - main
+    paths:
+    - ".github/workflows/compile_and_deploy.yml"
+    - "GithubActionsDemoApp-original-eng/**"
+    - "Tests/**"
 
 env:
   DOTNET_VERSION: 8.0.x
